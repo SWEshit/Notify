@@ -1,5 +1,3 @@
-//BOMain: Buisinessobjekt zur Applikation Notify als Semesterprojekt in SWE
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +14,7 @@ namespace BO_Notify
         
             List<string> dirs = new List<string>(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory).Split('\\'));
             dirs.RemoveAt(dirs.Count -1);
-            string conString = @"Data Source = (LocalDB)\v11.0;AttachDbFilename ="+String.Join(@"\",dirs) + @"\DB_Notify\Datenbank.mdf;Integrated Security = true; Connect Timeout=5";
+            string conString = @"Data Source = (LocalDB)\v11.0; attachdbfilename =C:\Users\Thomas\Dropbox\SWE shit\SWE_secondtry\Notify\DB_Notify\Datenbank.mdf;Integrated Security = true; Connect Timeout=5";
 
 
             SqlConnection con = new SqlConnection(conString);
