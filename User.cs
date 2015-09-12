@@ -19,28 +19,28 @@ namespace BO_Notify
 
         public string Username {
             get { return mUsername; }
-            internal set { mUsername = value; }
+            set { mUsername = value; }
         }
 
         public string Password {
             get { return mPassword; }
-            internal set { mPassword = value; }
+            set { mPassword = value; }
         }
 
         internal User() {
         }
 
         public bool Create(){
-            string SQL = "insert into [User] (UserID, name, password) values (@id, @name, @password)";
+            string SQL = "insert into [User] ( name, password) values ( @nam, @pw)";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
 
             mID = Guid.NewGuid().ToString();
 
-            cmd.Parameters.Add(new SqlParameter("id",mID));
-            cmd.Parameters.Add(new SqlParameter("name",mUsername));
-            cmd.Parameters.Add(new SqlParameter("password", mPassword));
+            //cmd.Parameters.Add(new SqlParameter("id",mID));
+            cmd.Parameters.Add(new SqlParameter("nam",mUsername));
+            cmd.Parameters.Add(new SqlParameter("pw", mPassword));
 
             return (cmd.ExecuteNonQuery() > 0);
 
