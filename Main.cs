@@ -1,3 +1,5 @@
+//BOMain: Buisinessobjekt zur Applikation Notify als Semesterprojekt in SWE
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,7 @@ namespace BO_Notify
         }
 
         public static User newUser(){
-        return new User(); 
+        return new User();
         }
 
         public static User getUser(string UserID){
