@@ -28,6 +28,7 @@ namespace index
                 {
                     TxtName.Text = newUser.Username;
                     TxtPass1.Text = newUser.Password;
+                    Session["ID"] = newUser.ID;
                     if(newUser.Create()){
                         Response.Redirect("Default.aspx");
                     }else LblError.Text = "Creation Failed";
