@@ -31,7 +31,7 @@ namespace BO_Notify
         }
 
         public bool Create(){
-            string SQL = "insert into User (ID, name, password) values (@id, @name, @password)";
+            string SQL = "insert into [User] (UserID, name, password) values (@id, @name, @password)";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
