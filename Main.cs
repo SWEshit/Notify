@@ -1,4 +1,4 @@
-﻿//BOMain: Buisinessobjekt zur Applikation Notify als Semesterprojekt in SWE
+//BOMain: Buisinessobjekt zur Applikation Notify als Semesterprojekt in SWE
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.IO;
 
 namespace BO_Notify
 {
-    public class Main
+    public static class Main
     {
         static internal SqlConnection GetConnection(){
         
@@ -26,12 +26,10 @@ namespace BO_Notify
 
         public static User newUser(){
         return new User(); 
-
         }
 
         public static User getUser(string UserID){
             return User.Load(UserID);
         }
-
     }
 }
