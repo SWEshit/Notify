@@ -1,37 +1,43 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="index.register" %>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web;
+using System.Web.UI.WebControls;
+using BO_Notify;
 
-<!DOCTYPE html>
+namespace index
+{
+    public partial class register : System.Web.UI.Page
+    {
+        string username;
+        string password;
+        User newUser;
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Session["ID"] = "";
+            newUser = Main.newUser();
+        }
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-        Please enter your data in the fields below.
-        <br />
-        <br />
-        Username
-        <asp:TextBox ID="TxtName" runat="server"></asp:TextBox>
-        <br />
-        <br />
-        Password
-        <asp:TextBox ID="TxtPass1" runat="server"></asp:TextBox>
-        <br />
-        <br />
-        Password again
-        <asp:TextBox ID="TxtPass2" runat="server"></asp:TextBox>
-        <br />
-        <br />
-        <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Create Account" />
-    
-    </div>
-        <asp:Label ID="LblError" runat="server"></asp:Label>
-        <br />
-        <asp:Label ID="LblTest" runat="server" Text="Label"></asp:Label>
-    </form>
-</body>
-</html>
+        protected void BtnRegister_Click(object sender, EventArgs e)
+        {
+            if (TxtPass1.Text == TxtPass2.Text)
+            {
+                if (newUser != null)
+                {
+                    TxtName.Text = newUser.Username;
+                    TxtPass1.Text = newUser.Password;
+                    if(newUser.Create()){
+                        Response.Redirect("Default.aspx");
+                    }else LblError.Text = "Creation Failed";
+                }
+            }
+            else
+            {
+                LblError.Text = "Passwoerter stimmen nicht ueberein";
+            }
+        }
+        
+    }
+}
