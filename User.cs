@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,10 +16,12 @@ namespace BO_Notify
             get { return mID; }
             internal set { mID = value; }
         }
+
         public string Username {
             get { return mUsername; }
             internal set { mUsername = value; }
         }
+
         public string Password {
             get { return mPassword; }
             internal set { mPassword = value; }
@@ -28,8 +30,8 @@ namespace BO_Notify
         internal User() {
         }
 
-        public bool Save(){
-            string SQL = "insert into User(ID,Name,Password) values (@id, @name, @password)";
+        public bool Create(){
+            string SQL = "insert into User (ID, name, password) values (@id, @name, @password)";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
@@ -53,7 +55,7 @@ namespace BO_Notify
         }
 
         internal static User Load(string UserID){
-            string SQL = "select id, name from User where ID = @id";
+            string SQL = "select ID, name from User where ID = @id";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = SQL;
             cmd.Connection = Main.GetConnection();
