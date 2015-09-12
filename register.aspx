@@ -23,8 +23,8 @@ namespace index
             {
                 if (newUser != null)
                 {
-                    TxtName.Text = newUser.Username;
-                    TxtPass1.Text = newUser.Password;
+                    newUser.Username = TxtName.Text;
+                    newUser.Password = TxtPass1.Text;
                     Session["ID"] = newUser.ID;
                     if(newUser.Create()){
                         Response.Redirect("Default.aspx");
