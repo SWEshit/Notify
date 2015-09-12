@@ -10,8 +10,6 @@ namespace index
 {
     public partial class register : System.Web.UI.Page
     {
-        string username;
-        string password;
         User newUser;
         
         protected void Page_Load(object sender, EventArgs e)
