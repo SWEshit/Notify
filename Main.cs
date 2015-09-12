@@ -1,74 +1,35 @@
+//BOMain: Buisinessobjekt zur Applikation Notify als Semesterprojekt in SWE
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Text;
+using System.IO;
 
 namespace BO_Notify
 {
-    public class User
+    public static class Main
     {
-        private string mID;
-        private string mUsername;
-        private string mPassword;
-
-        public string ID {
-            get { return mID; }
-            internal set { mID = value; }
-        }
-
-        public string Username {
-            get { return mUsername; }
-            set { mUsername = value; }
-        }
-
-        public string Password {
-            get { return mPassword; }
-            set { mPassword = value; }
-        }
-
-        internal User() {
-        }
-
-        public bool Create(){
-            string SQL = "insert into [User] ( name, password) values ( @nam, @pw)";
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = SQL;
-            cmd.Connection = Main.GetConnection();
-
-            mID = Guid.NewGuid().ToString();
-
-            //cmd.Parameters.Add(new SqlParameter("id",mID));
-            cmd.Parameters.Add(new SqlParameter("nam",mUsername));
-            cmd.Parameters.Add(new SqlParameter("pw", mPassword));
-
-            return (cmd.ExecuteNonQuery() > 0);
-
-            
-        }
-        private static User fillUserFromSQLDataReader(SqlDataReader reader){
-            User oneUser = new User();
-            oneUser.ID = reader.GetString(0);
-            oneUser.Username = reader.GetString(1);
-            return oneUser;
+        static internal SqlConnection GetConnection(){
         
+            List<string> dirs = new List<string>(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory).Split('\\'));
+            dirs.RemoveAt(dirs.Count -1);
+            string conString = @"Data Source = (LocalDB)\v11.0; attachdbfilename =C:\Users\Thomas\Dropbox\SWE shit\SWE_secondtry\Notify\DB_Notify\Datenbank.mdf;Integrated Security = true; Connect Timeout=5";
+
+
+            SqlConnection con = new SqlConnection(conString);
+            con.Open();
+            return con;
         }
 
-        internal static User Load(string UserID){
-            string SQL = "select ID, name from User where ID = @id";
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = SQL;
-            cmd.Connection = Main.GetConnection();
-            cmd.Parameters.Add(new SqlParameter("id", UserID));
-            SqlDataReader reader = cmd.ExecuteReader();
-            if(reader.HasRows){
-                reader.Read();
-                return fillUserFromSQLDataReader(reader);
+        public static User newUser(){
+        return new User();
+        }
 
-            }else{
-                return null;
-            }
-
+        public static User getUser(string UserID){
+            return User.Load(UserID);
         }
     }
 }
