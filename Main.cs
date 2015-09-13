@@ -32,5 +32,12 @@ namespace BO_Notify
         public static User getUser(string UserID){
             return User.Load(UserID);
         }
+        public static Songs getSongs(){
+            return Song.LoadAllSongs();
+        }
+        public static Songs getSongs(string AlbumID){
+            return Song.LoadSongsForAlbum(AlbumID);
+        }
+       
     }
 }
